@@ -20,7 +20,7 @@ const ReviewCard = ({ img, name, username, body }) => {
           src={img}
         />
         <div className="flex flex-col">
-          <figcaption className="text-sm font-medium text-white">
+          <figcaption className="text-sm font-medium text-white khmer">
             {name}
           </figcaption>
           <p className="text-xs font-medium text-white/40">{username}</p>

@@ -55,6 +55,11 @@ body {
   overflow-x: hidden;
 }
 
+/* Khmer font for localized names */
+.khmer {
+  font-family: 'Noto Sans Khmer', "Funnel Display", sans-serif;
+}
+
 .c-space {
   @apply sm:px-10 px-5 lg:px-15;
 }

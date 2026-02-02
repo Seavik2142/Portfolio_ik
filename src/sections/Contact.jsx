@@ -1,5 +1,11 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+
+// Initialize EmailJS with public key from environment for security.
+// Set VITE_EMAILJS_KEY in a local .env file (Vite exposes vars prefixed with VITE_)
+if (import.meta.env.VITE_EMAILJS_KEY) {
+  emailjs.init(import.meta.env.VITE_EMAILJS_KEY);
+}
 import Alert from "../components/Alert";
 import { Particles } from "../components/Particles";
 const Contact = () => {
@@ -29,29 +35,30 @@ const Contact = () => {
 
     try {
       console.log("From submitted:", formData);
-      await emailjs.send(
-        "service_79b0nyj",
+      const result = await emailjs.send(
+        "service_d9l1hp9",
         "template_17us8im",
         {
           from_name: formData.name,
           to_name: "Ali",
           from_email: formData.email,
-          to_email: "AliSanatiDev@gmail.com",
+          to_email: "ahzarky@gmail.com",
           message: formData.message,
-        },
-        "pn-Bw_mS1_QQdofuV"
+        }
       );
+      console.log("EmailJS response:", result);
       setIsLoading(false);
       setFormData({ name: "", email: "", message: "" });
-      showAlertMessage("success", "You message has been sent!");
+      showAlertMessage("success", "Your message has been sent!");
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
-      showAlertMessage("danger", "Somthing went wrong!");
+      console.error("EmailJS error:", error);
+      const errMsg = (error && (error.text || error.message)) || "Something went wrong!";
+      showAlertMessage("danger", errMsg);
     }
   };
   return (
-    <section className="relative flex items-center c-space section-spacing">
+    <section id="lets-talk" className="relative flex items-center c-space section-spacing">
       <Particles
         className="absolute inset-0 -z-50"
         quantity={100}
